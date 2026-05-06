@@ -1,17 +1,18 @@
 import json
-
 import requests
 
-# TODO: send a GET using the URL http://127.0.0.1:8000
-r = None # Your code here
+# 1. Test the GET root endpoint
+url_get = "http://127.0.0.1:8000"
+r_get = requests.get(url_get)
 
-# TODO: print the status code
-# print()
-# TODO: print the welcome message
-# print()
+# Print the status code and the welcome message
+print(f"GET Status Code: {r_get.status_code}")
+print(f"GET Welcome Message: {r_get.json()['message']}")
 
+print("-" * 20)
 
-
+# 2. Test the POST inference endpoint
+url_post = "http://127.0.0.1:8000/data/"
 data = {
     "age": 37,
     "workclass": "Private",
@@ -29,10 +30,10 @@ data = {
     "native-country": "United-States",
 }
 
-# TODO: send a POST using the data above
-r = None # Your code here
+# Send the POST request
+# Note: requests.post(..., json=data) automatically handles JSON encoding and headers
+r_post = requests.post(url_post, json=data)
 
-# TODO: print the status code
-# print()
-# TODO: print the result
-# print()
+# Print the status code and the inference result
+print(f"POST Status Code: {r_post.status_code}")
+print(r_post.text)
